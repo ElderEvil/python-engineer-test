@@ -1,0 +1,51 @@
+[project]
+name = "python-engineer-test"
+version = "0.1.0"
+description = "Python Engineer Test Assignment - Task modules for CV and integration tasks"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["opencv-python>=4.10.0", "numpy>=2.0.0", "folium>=0.19.0"]
+
+[project.optional-dependencies]
+task1 = ["opencv-python>=4.10.0", "numpy>=2.0.0", "folium>=0.19.0"]
+task2 = ["requests>=2.32.0"]
+task3 = ["opencv-python>=4.10.0", "numpy>=2.0.0", "folium>=0.19.0", "ultralytics>=8.3.0"]
+task4-gpu = ["torch>=2.5.0", "torchvision>=0.20.0"]
+tasks = [
+  "opencv-python>=4.10.0",
+  "numpy>=2.0.0",
+  "folium>=0.19.0",
+  "requests>=2.32.0",
+  "ultralytics>=8.3.0",
+]
+dev = ["ty>=0.0.1a0", "pre-commit>=4.0.0", "ruff>=0.9.0"]
+
+[project.scripts]
+pet-task1 = "python_engineer_test.task_1.drone_path:main"
+pet-task2 = "python_engineer_test.task_2.signal_bot:main"
+pet-task3 = "python_engineer_test.task_3.car_tracking:main"
+pet-task4 = "python_engineer_test.task_4.vipe_runner:main"
+pet = "python_engineer_test.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_engineer_test"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ty.environment]
+python-version = "3.13"
+
+[tool.ty.rules]
+# Ignore unresolved imports for optional third-party dependencies
+unresolved-import = "ignore"
+# Allow missing type annotations for self/cls
+missing-argument = "warn"
